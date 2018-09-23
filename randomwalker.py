@@ -30,30 +30,32 @@ class Walker(object):
 		return img 
 		
 	def step(self):
-		random_num = random.randrange(4)
+		#random_num = random.randrange(4)
+		random_num = random.random()
 		print("random number", random_num)
 		self.num += 1
-		if random_num == 0 :
-			#take a step up
-			self.y += self.height
+		if random_num < 0.4 :
+			#high probability it moves down
+			#take a step down
+			self.y += self.height * 2
 			img = self.draw()
 			self.imgs.append(img)
 			self.prev_img = img
-		elif random_num == 1 :
+		elif random_num < 0.6 :
 			#take a step right
-			self.x += self.width
+			self.x += self.width * 2
 			img = self.draw()
 			self.imgs.append(img)
 			self.prev_img = img
-		elif random_num == 2 :
+		elif random_num < 0.8 :
 			#take a step left
-			self.x -= self.width
+			self.x -= self.width * 2
 			img = self.draw()
 			self.imgs.append(img)
 			self.prev_img = img
-		elif random_num == 3 :
-			#take a step back
-			self.y -= self.height
+		elif random_num <= 1 :
+			#take a step up
+			self.y -= self.height * 2
 			img = self.draw()
 			self.imgs.append(img)
 			self.prev_img = img

@@ -1,0 +1,82 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="description" content="$1">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Nature of Code - Vectors</title>
+        <style>
+            html, body {
+              padding:0;
+              margin:0;
+            }
+            #wrapper {
+              max-width:1080px;
+              margin:50px auto;
+            }
+            #canvas {
+              width:100%;
+              height:500px;
+            }
+        </style>
+    </head>
+    <body>
+      <div id="wrapper">
+        <canvas id="canvas"></canvas>
+      </div>
+      <script>
+
+
+        var position = {x:100, y:100, z:100};
+        var velocity = {x:1, y:3.3, z:1};
+        var acceleration = {x:0.1, y:0.1, z:0}
+
+        var canvas = document.getElementById('canvas');
+        var ctx = canvas.getContext('2d');
+
+        var width = canvas.width;
+        var height = canvas.height;
+
+        console.log(width, height);
+
+        function update() {
+          console.log('update');
+          velocity = addVectors(velocity, acceleration);
+          position = addVectors(position, velocity);
+
+          if ((position.x > width) || (position.x < 0)) {
+            velocity.x = velocity.x * -1;
+          }
+          if ((position.y > height) || (position.y < 0)) {
+            velocity.y = velocity.y * -1;
+          }
+
+          draw();
+
+        }
+
+        function draw() {
+          ctx.clearRect(0, 0, width, height);
+          ctx.fillStyle = 'grey';
+          ctx.beginPath();
+          ctx.ellipse(position.x, position.y, 10, 10, 0, 0, 2 * Math.PI);
+          ctx.stroke();
+          ctx.fill();
+        }
+
+        setInterval(function() {
+          update();
+        }, 50)
+
+
+        function addVectors(a,b) {
+          a.x += b.x;
+          a.y += b.y;
+          a.z += b.z;
+          return a;
+        }
+
+      </script>
+    </body>
+</html>
