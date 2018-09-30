@@ -18,7 +18,7 @@ context.paint()
 # image = imageio.imread('img_{}.png'.format(self.num))
 # writer.append_data(image)
 
-def fractal_tree(starting_length, scaling, rotation):
+def fractal_tree(starting_length, length_scaling):
 
     context.set_source_rgb(0, 0, 0)
     context.save()
@@ -27,32 +27,38 @@ def fractal_tree(starting_length, scaling, rotation):
     def branch(len):
 
         context.set_source_rgb(0, 0, (len*2)/100)
+        context.set_line_width(len/12)
 
         context.move_to(0, 0)
         context.line_to(0, -len)
         context.stroke()
         context.translate(0, -len)
 
-        len *= scaling;
+        len *= length_scaling;
 
         if len > 2:
-            context.save()
-            context.rotate(rotation)
-            branch(len)
-            context.restore()
 
-            context.save()
-            context.rotate(-rotation)
-            branch(len)
-            context.restore()
+            n = random.randint(1, 5)
+
+            for i in range(0, n):
+                context.save()
+                rot = random.uniform(-pi/2, pi/2)
+                context.rotate(rot)
+                branch(len)
+                context.restore()
+
+            # context.save()
+            # context.rotate(-rotation)
+            # branch(len)
+            # context.restore()
 
 
     branch(starting_length)
     context.restore()
 
 
-# fractal_tree(50, 0.66, pi/6)
-fractal_tree(50, 0.66, pi/4)
+
+fractal_tree(50, 0.66)
 
 
 num = 1
