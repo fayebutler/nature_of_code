@@ -65,5 +65,5 @@ class Walker:
 
 
 walker = Walker(200, 200)
-for i in range(0, 10):
+for i in range(0, 30):
 	walker.step()
