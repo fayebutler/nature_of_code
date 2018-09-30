@@ -47,15 +47,8 @@ def fractal_tree(starting_length, length_scaling):
                 branch(len)
                 context.restore()
 
-            # context.save()
-            # context.rotate(-rotation)
-            # branch(len)
-            # context.restore()
-
-
     branch(starting_length)
     context.restore()
-
 
 
 fractal_tree(50, 0.66)
